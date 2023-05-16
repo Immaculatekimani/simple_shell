@@ -40,7 +40,7 @@ typedef struct built_ins
 {
 	char *name;
 	int (*func)();
-} builtins_s;
+} builtins_t;
 
 /* --Help Struct --*/
 /**
@@ -52,7 +52,7 @@ typedef struct help_struct
 {
 	char *name;
 	void (*func)();
-} help_s;
+} help_t;
 
 
 /* --General Functions-- */
@@ -74,7 +74,7 @@ char **is_path(char **commands);
 char *concat_path(char *s1, char *s2);
 char *path_copy(char *name);
 
-/* Builtin_Functions */
+/* builtin_functions */
 int is_builtins(char **commands, char *input);
 int print_environ(char **commands);
 int set_environ(char **commands);
