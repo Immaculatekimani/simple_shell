@@ -56,7 +56,7 @@ typedef struct help_struct
 
 
 /* --General Functions-- */
-void loop(void);
+void shell_loop(void);
 char **create_arg(char *input);
 int wordcount(char *st);
 char *tokenize(char *input, const char *delim, char **saveptr);
@@ -65,7 +65,7 @@ void run_prog(char **commands);
 void sighandler(int sig_digit);
 int is_arg(char *first_com, char *arg0);
 
-/* Memory_Functions */
+/* memory_functions */
 void clear_arr(char **vector);
 void *mem_alloc(size_t size);
 
