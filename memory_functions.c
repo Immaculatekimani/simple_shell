@@ -13,7 +13,7 @@ void *mem_alloc(size_t size)
 	pointer = malloc(size);
 	if (pointer == NULL)
 	{
-		_puts("Memory allocation failed!");
+		_push("Memory allocation failed!");
 		exit(20);
 	}
 	return (pointer);
