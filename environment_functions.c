@@ -10,10 +10,12 @@
 int unset_env(char *name)
 {
 	char **ep;
+	int len;
 
 	if (name == NULL || name[0] == '\0' || _strchr(name, '=') != NULL)
 		return (-1);
-	ep = environ;
+	ep = env;
+	len = _strlen(name);
 	while (*ep != NULL)
 	{
 		if (_strcmp(*ep, name) == 0 && (*ep)[len] == '=')
@@ -39,7 +41,7 @@ char *find_env(char *name)
 {
 	char **envp;
 
-	envp = environ;
+	envp = env;
 	while (*envp != NULL)
 	{
 		if (_strcmp(*envp, name) == 0)
@@ -64,21 +66,21 @@ int add_env(char *new_arr, char *name)
 
 	if (find_env(name) == NULL)
 	{
-		for (i = 0; environ[i] != NULL; i++)
+		for (i = 0; env[i] != NULL; i++)
 			;
 		nenv = mem_alloc(sizeof(char *) * (i + 2));
 		envp = nenv;
 		i = 0;
-		while (*environ != NULL)
+		while (*env != NULL)
 		{
-			*nenv = *environ;
+			*nenv = *env;
 			nenv++;
-			environ++;
+			env++;
 		}
 		*nenv = new_arr;
 		nenv++;
 		*nenv = NULL;
-		environ = envp;
+		env = envp;
 		return (0);
 	}
 	else
