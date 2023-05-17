@@ -77,7 +77,7 @@ char *_strchr(char *s, char c)
  * Return: pointer to matched byte or NULL if no match
  */
 
-char *_strpbrk(char *s, char *accept)
+char *_strpbrk(char *s, const char *accept)
 {
 	int str_index;
 	int sub_str_index;

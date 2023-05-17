@@ -95,7 +95,7 @@ int _putchar(char c);
 char *_strdup(char *str);
 int _strlen(char *s);
 char *_strchr(char *s, char c);
-char *_strpbrk(char *s, char *accept);
+char *_strpbrk(char *s, const char *accept);
 int _strspn(char *s, const char *accept);
 int _strcmp(char *s1, char *s2);
 char *str_concat(char *s1, char *s2);
