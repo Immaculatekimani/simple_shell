@@ -18,14 +18,13 @@ int is_builtins(char **commands, char *input)
 		{"help", shell_help},
 		{NULL, NULL}
 	};
-	int i, len;
+	int i;
 
-	len = _strlen(commands[0]);
 	for (i = 0; built_ins[i].name != NULL; i++)
 	{
-		if (_strncmp(commands[0], "exit", 4) == 0)
+		if (_strcmp(commands[0], "exit") == 0)
 			return (built_ins[0].func(commands, input));
-		if (_strncmp(commands[0], built_ins[i].name, len) == 0)
+		if (_strcmp(commands[0], built_ins[i].name) == 0)
 			return (built_ins[i].func(commands));
 	}
 	return (-1);
@@ -77,7 +76,7 @@ int shell_help(char **commands)
 		{"help", push_help},
 		{NULL, NULL}
 	};
-	int i, j, commlen, helped;
+	int i, j, helped;
 
 	helped = 0;
 	i = 1;
@@ -91,8 +90,7 @@ int shell_help(char **commands)
 		j = 0;
 		while (built_ins[j].name != NULL)
 		{
-			commlen = _strlen(commands[i]);
-			if (_strncmp(built_ins[j].name, commands[i], commlen) == 0)
+			if (_strcmp(built_ins[j].name, commands[i]) == 0)
 			{
 				helped++;
 				built_ins[j].func();
