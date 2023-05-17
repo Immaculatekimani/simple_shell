@@ -9,8 +9,11 @@
  *
  * Return: 0 if success, -1 if failure
  */
-int main(__attribute__((unused)) int argc, char **argv, char **env)
+int main(int argc, char **argv, char **env)
 {
+	(void)argc;
+	(void)env;
+	(void)argv;
 	shell_loop();
 	return (0);
 }
