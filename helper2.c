@@ -29,9 +29,9 @@ void push_help(void)
 	_push("    Returns success unless invalide \'name\' is given.\n");
 }
 /**
- * push_help - describes basic information
+ * display_help - describes basic information
  */
-void push_help(void)
+void display_help(void)
 {
 	_push("These commands are defined internally.");
 	_push(" Type \'help\' to see this list.\n");
