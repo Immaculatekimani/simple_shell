@@ -1,3 +1,5 @@
+#include "shell.h"
+
 /**
  * print_environ - print the list of environment variables
  * @commands: commands passed
@@ -11,11 +13,11 @@ int print_environ(char **commands)
 
 	if (commands[1] == NULL)
 	{
-		for (i = 0; environ[i]; i++)
+		for (i = 0; env[i]; i++)
 		{
-			for (j = 0; environ[i][j]; j++)
+			for (j = 0; env[i][j]; j++)
 			{
-				c = environ[i][j];
+				c = env[i][j];
 				_putchar(c);
 			}
 			_putchar('\n');
