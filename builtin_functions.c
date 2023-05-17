@@ -12,7 +12,7 @@ int is_builtins(char **commands, char *input)
 {
 	builtins_t built_ins[] = {
 		{"exit", shell_exit},
-		{"env", print_env},
+		{"env", print_environ},
 		{"unsetenv", unset_environ},
 		{"setenv", set_environ},
 		{"help", shell_help},
@@ -82,7 +82,7 @@ int shell_help(char **commands)
 	i = 1;
 	if (commands[1] == NULL)
 	{
-		print_help();
+		display_help();
 		return (0);
 	}
 	while (commands[i] != NULL)
