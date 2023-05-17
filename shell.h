@@ -61,7 +61,7 @@ char **create_arg(char *input);
 int wordcount(char *st);
 char *tokenize(char *input, const char *delim, char **saveptr);
 void display(char **commands);
-void run_prog(char **commands);
+void run_shell(char **commands);
 void sighandler(int sig_digit);
 int is_arg(char *first_com, char *arg0);
 
