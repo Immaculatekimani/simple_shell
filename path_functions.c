@@ -87,7 +87,7 @@ char *path_copy(char *name)
 	int len, i;
 
 	i = 0;
-	envp = environ;
+	envp = env;
 	while (envp[i] != NULL)
 	{
 		if (_strcmp(envp[i], name) == 0)

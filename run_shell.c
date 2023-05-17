@@ -39,7 +39,7 @@ void run_shell(char **commands)
 	}
 	if (pid == 0)
 	{
-		execve(commands[0], commands, environ);
+		execve(commands[0], commands, env);
 		perror("Error");
 		free(commands);
 		_exit(1);
