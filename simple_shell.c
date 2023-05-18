@@ -68,7 +68,7 @@ void shell_loop(void)
 
 /**
  * sighandler - Print out the prompt if ctrl-C is hit
- * @sig_digit: Unused variable 
+ * @sig_digit: Unused variable
  */
 void sighandler(int sig_digit)
 {

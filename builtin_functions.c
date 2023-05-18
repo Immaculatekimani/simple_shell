@@ -3,7 +3,7 @@
 /**
  * is_builtins - Check to see if given command is a builtin
  * @commands: Array holding command and all its arguments
- * @input: The user input received 
+ * @input: The user input received
  *
  * Return: the return value of the builtin called on success,
  * or -1 if it failed

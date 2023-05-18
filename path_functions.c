@@ -40,7 +40,7 @@ char **is_path(char **commands)
 }
 
 /**
- * concat_path - join strings together with a '/' 
+ * concat_path - join strings together with a '/'
  *
  * @s1: starting string
  * @s2: completing string
