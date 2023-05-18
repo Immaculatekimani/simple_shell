@@ -4,7 +4,7 @@
 #define IN 1
 
 /* --Global_Variables-- */
-extern char **env;
+extern char **environ;
 int forked;
 
 #include <unistd.h>
