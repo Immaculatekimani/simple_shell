@@ -69,10 +69,10 @@ int _strcmp(char *s1, char *s2)
 }
 
 /**
- * _strcat - function definition
+ * str_concat - function definition
  * Description: concatenates dest and src strings
- * @dest: second string
- * @src: first string
+ * @s1: second string
+ * @s2: first string
  * Return: character
  */
 char *str_concat(char *s1, char *s2)
