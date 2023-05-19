@@ -79,25 +79,18 @@ char *concat_path(char *s1, char *s2)
  *
  * @name: the name of the Path
  *
- * Return: the Path or null if not found
+ * Return: the duplicate path or null if not found
  */
 char *path_copy(char *name)
 {
-	char **envp, *path;
-	int len, i;
+	char  *path, *dupath;
 
-	i = 0;
-	envp = environ;
-	len = _strlen(name);
-	while (envp[i] != NULL)
+	path = getenv(name);
+	if (path == NULL)
 	{
-		if (_strcmp(envp[i], name) == 0)
-		{
-			path = _strdup(&envp[i][len + 1]);
-			return (path);
-		}
-		i++;
+		return (NULL);
 	}
-	return (NULL);
+	dupath = _strdup(path);
+	return (dupath);
 }
 
