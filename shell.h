@@ -3,40 +3,29 @@
 #define OUT 0
 #define IN 1
 
-/* --Global_Variables-- */
+/* --Global Variables-- */
 extern char **environ;
-int forked;
+int inchild;
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <signal.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-
-
-/* locationList */
+/* --Address List-- */
 /**
- * struct locations - Stores adresses
- * @location: Address being stored
+ * struct addresses - Struct of a node to hold a list of addresses
+ * @address: Address being stored
  * @next: Pointer to next node in list
  */
-typedef struct locations
+typedef struct addresses
 {
-	void *location;
-	struct locations *next;
-} loc_t;
+	void *address;
+	struct addresses *next;
+} addr_t;
 
-/* Builtin_Struct*/
+/* --Builtin Struct--*/
 /**
- * struct built_ins - Struct for builtins names & ptrs to the function
+ * struct builtins_s - Struct for builtins names & ptrs to the function
  * @name: Name of the builtin
- * @func: Points to the function to call from the name
+ * @func: Pointer to function to call when name is inputted
  */
-typedef struct built_ins
+typedef struct builtins_s
 {
 	char *name;
 	int (*func)();
@@ -44,71 +33,81 @@ typedef struct built_ins
 
 /* --Help Struct --*/
 /**
- * struct help_struct - for descriptions of builtins
- * @name: Name of builtin
- * @func: print the help for the named function
+ * struct help_s - Struct for different descriptions of builtins
+ * @name: Name of which builtin to get help for
+ * @func: Function to print the help for that function
  */
-typedef struct help_struct
+typedef struct help_s
 {
 	char *name;
 	void (*func)();
 } help_t;
 
+/* --Library Headers-- */
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <signal.h>
 
 /* --General Functions-- */
-void shell_loop(void);
-char **create_arg(char *input);
-int wordcount(char *st);
+void loop(void);
+char **make_args(char *input);
+int wordcount(char *str);
 char *tokenize(char *input, const char *delim, char **saveptr);
-void display(char **commands);
-void run_shell(char **commands);
-void sighandler(int sig_digit);
-int is_arg(char *first_com, char *arg0);
+void output(char **args);
+void execute(char **args);
+void sighandler(int sig_num);
+int check_arg(char *firstarg, char *arg0);
 
-/* memory_functions */
-void clear_arr(char **vector);
-void *mem_alloc(size_t size);
+/* --Memory Functions-- */
+void free_array(char **array);
+void *smart_alloc(size_t size);
 
-/* path_functions */
-char **is_path(char **commands);
-char *concat_path(char *s1, char *s2);
-char *path_copy(char *name);
+/* --Path Functions-- */
+char **check_path(char **args);
+char *path_concat(char *s1, char *s2);
+char *_copypath(char *name);
 
-/* builtin_functions */
-int is_builtins(char **commands, char *input);
-int print_environ(char **commands);
-int set_environ(char **commands);
-int unset_environ(char **commands);
-int shell_exit(char **commands, char *input);
-int shell_help(char **commands);
+/* --Builtin Functions-- */
+int check_builtins(char **args, char *input);
+int hosh_printenv(char **args);
+int hosh_setenv(char **args);
+int hosh_unsetenv(char **args);
+int hosh_exit(char **args, char *input);
+int hosh_help(char **args);
 
-/* environment_functions */
-int unset_env(char *name);
-char *find_env(char *name);
-int add_env(char *new_arr, char *name);
+/* --Env Functions-- */
+int _unsetenv(char *name);
+char *_findenv(char *name);
+int _addenv(char *newvar, char *name);
 
-/* print_functions*/
-void _push(char *str);
+/* --Print Functions-- */
+void _puts(char *str);
 int _putchar(char c);
 
-/* string_functions */
+/* --String Functions-- */
 char *_strdup(char *str);
 int _strlen(char *s);
 char *_strchr(char *s, char c);
 char *_strpbrk(char *s, const char *accept);
 int _strspn(char *s, const char *accept);
-int _strcmp(char *s1, char *s2);
+int _strncmp(char *s1, char *s2, int n);
 char *str_concat(char *s1, char *s2);
 char *_strcpy(char *dest, char *src);
 
-/* number_functions */
-int _atoi(char *st);
+/* --Math Functions-- */
+int _atoi(char *str);
 
-/* helpers */
-void push_exit(void);
-void push_env(void);
-void push_setenv(void);
-void push_unsetenv(void);
-void push_help(void);
-void display_help(void);
+/* --Help Functions-- */
+void help_exit(void);
+void help_env(void);
+void help_setenv(void);
+void help_unsetenv(void);
+void help_help(void);
+void print_help(void);
 #endif /* SHELL_H */
