@@ -1,11 +1,11 @@
 #include "shell.h"
 
 /**
- * _puts - prints a string, followed by a newline, to stdout
+ * _push - prints a string
  *
- * @str: pointer to the string to print
+ * @str: the string to print
  */
-void _puts(char *str)
+void _push(char *str)
 {
 	int n = 0;
 
@@ -17,9 +17,9 @@ void _puts(char *str)
 }
 
 /**
- * _putchar - writes the character c to stdout
+ * _putchar - prints characters
  *
- * @c: The character to print
+ * @c: The character to print to stdout
  *
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriately.
@@ -28,3 +28,4 @@ int _putchar(char c)
 {
 	return (write(1, &c, 1));
 }
+

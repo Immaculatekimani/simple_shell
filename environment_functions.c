@@ -1,24 +1,24 @@
 #include "shell.h"
 
 /**
- * _unsetenv - unset an environment variable
+ * unset_env - unsets an environment
  *
  * @name: name of variable
  *
  * Return: 0 on success, -1 on failure
  */
-int _unsetenv(char *name)
+int unset_env(char *name)
 {
 	char **ep;
 	int len;
 
 	if (name == NULL || name[0] == '\0' || _strchr(name, '=') != NULL)
 		return (-1);
-	len = _strlen(name);
 	ep = environ;
+	len = _strlen(name);
 	while (*ep != NULL)
 	{
-		if (_strncmp(*ep, name, len) == 0 && (*ep)[len] == '=')
+		if (_strcmp(*ep, name) == 0 && (*ep)[len] == '=')
 			while (*ep != NULL)
 			{
 				*ep = *(ep + 1);
@@ -31,22 +31,20 @@ int _unsetenv(char *name)
 }
 
 /**
- * _findenv - get the pointer to an environment variable
+ * find_env - gets an environment variable
  *
- * @name: variable name
+ * @name: name used to look for environment
  *
  * Return: pointer to variable if it exists, or NULL if it doesn't
  */
-char *_findenv(char *name)
+char *find_env(char *name)
 {
 	char **envp;
-	int len;
 
 	envp = environ;
-	len = _strlen(name);
 	while (*envp != NULL)
 	{
-		if (_strncmp(*envp, name, len) == 0)
+		if (_strcmp(*envp, name) == 0)
 			return (*envp);
 		envp++;
 	}
@@ -54,38 +52,39 @@ char *_findenv(char *name)
 }
 
 /**
- * _addenv - add or modify an environment variable
+ * add_env - add or modify an environment
  *
- * @newvar: variable and value
+ * @new_arr: variable and value
  * @name: name of variable to add or modify
  *
  * Return: 0 if success, -1 if failure
  */
-int _addenv(char *newvar, char *name)
+int add_env(char *new_arr, char *name)
 {
-	char **newenv, **newhead;
+	char **nenv, **envp;
 	size_t i;
 
-	if (_findenv(name) == NULL)
+	if (find_env(name) == NULL)
 	{
 		for (i = 0; environ[i] != NULL; i++)
 			;
-		newenv = smart_alloc(sizeof(char *) * (i + 2));
-		newhead = newenv;
+		nenv = mem_alloc(sizeof(char *) * (i + 2));
+		envp = nenv;
 		i = 0;
 		while (*environ != NULL)
 		{
-			*newenv = *environ;
-			newenv++;
+			*nenv = *environ;
+			nenv++;
 			environ++;
 		}
-		*newenv = newvar;
-		newenv++;
-		*newenv = NULL;
-		environ = newhead;
+		*nenv = new_arr;
+		nenv++;
+		*nenv = NULL;
+		environ = envp;
 		return (0);
 	}
 	else
 		return (-1);
 	return (0);
 }
+
