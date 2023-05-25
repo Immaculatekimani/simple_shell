@@ -38,7 +38,6 @@ void shell_loop(void)
 	while (1)
 	{
 		forked = 0;
-		_push("Shell$ ");
 		if (getline(&input, &size, stdin) != -1)
 		{
 			if (input[0] != '\n' && input[0] != '#')
@@ -73,8 +72,6 @@ void shell_loop(void)
 void sighandler(int sig_digit)
 {
 	(void)sig_digit;
-	if (forked == 0)
-		_push("\nShell$ ");
 	signal(SIGINT, sighandler);
 }
 
